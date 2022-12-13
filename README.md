@@ -1,4 +1,4 @@
-# iterLS: An Implementation of Iterative LabelhSpreading
+# iterLS: An Implementation of Iterative Label Spreading
 
 This is an implementation of a semi-supervised/unsupervised clustering methods called Iterative Label Spreading. The algorithm is presented in the following paper by Amanda J. Parker and Amanda J. Barnard. 
 
@@ -12,8 +12,8 @@ The current implementation is very minimal however provides methods and variable
 ## Installation
 
 ```bash
-git clone
-cd iterLS
+git clone git+https://github.com/Dan-Tan/Iterative-Label-Spreading.git
+cd Iterative-Label-Spreading
 pip install -e .
 ```
 
