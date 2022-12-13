@@ -1,3 +1,4 @@
 *.so
 *.html
 __pycache__/
+cython_wrapper.c
