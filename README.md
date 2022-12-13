@@ -7,7 +7,7 @@ DOI:  https://doi.org/10.1002/adts.201900145
 
 To use the algorithm, I recommend reading the paper first as it describes how to use Iterative Label Spreading. Use cases go beyond simple clustering such as evaluating performance of a given clustering on a data set. 
 
-The current implementation is very minimal, providing methods and variables that should allow the user, with plotting techniques, to use Iterative Label Spreading effectively. Plotting techniques and suggested segmentation is on my todo list. Currently, I have not igoroursly tested edge cases, feel free to raise an issue or pull request.
+The current implementation is very minimal, providing methods and variables that should allow the user, with plotting techniques, to use Iterative Label Spreading effectively. Plotting techniques and suggested segmentation is on my todo list. Currently, I have not rigoroursly tested edge cases, feel free to raise an issue or pull request.
 
 ## Installation
 
