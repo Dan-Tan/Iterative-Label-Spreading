@@ -1,7 +1,6 @@
 from .cython_wrapper import ils_spread
 from .admm import admm
 from numpy import array, split, argmin, intc, empty_like, arange, argsort
-from scipy.ndimage.filters import gaussian_filter1d
 
 class ILS():
 
@@ -43,7 +42,7 @@ class ILS():
 
         segments = split(self.rmin, inds)
         segmented_ords = split(self.ordering, inds)
-        segment_sm = [gaussian_filter1d(seg, max(5, len(seg)//10)) for seg in segments]
+        segment_sm = [admm(seg, 20, 100, 5) for seg in segments]
         mins = [ords[argmin(seg)] for (seg, ords) in zip(segment_sm, segmented_ords)]
 
         labels = [i+1 for i in range(len(mins))]
