@@ -1,0 +1,3 @@
+*.so
+*.html
+__pycache__/
