@@ -1,13 +1,13 @@
 # iterLS: An Implementation of Iterative Label Spreading
 
-This is an implementation of a semi-supervised/unsupervised clustering methods called Iterative Label Spreading. The algorithm is presented in the following paper by Amanda J. Parker and Amanda J. Barnard. 
+This is an implementation of a semi-supervised/unsupervised clustering method called Iterative Label Spreading. The main algorithm is written in c, and wrapped in cython for use in python. The algorithm is presented in the following paper by Amanda J. Parker and Amanda S. Barnard. 
 
 "Selecting Appropriate Clustering Methods for Materials Science Applications of Machine Learning". Published 09/10/2019. 
 DOI:  https://doi.org/10.1002/adts.201900145
 
-To use the algorithm, I recommend reading the paper first as it describes how to use Iterative Label Spreading, as use cases go beyond simple clustering such as evaluating performance of a given clustering on a data set. 
+To use the algorithm, I recommend reading the paper first as it describes how to use Iterative Label Spreading. Use cases go beyond simple clustering such as evaluating performance of a given clustering on a data set. 
 
-The current implementation is very minimal however provides methods and variables that should allow the user, with plotting techniques, to use Iterative Label Spreading effectively. Providing plotting techniques and suggested segmentation is on my todo list. Currently, I have not rigoroursly tested edge cases, feel free to raise an issue or pull request.
+The current implementation is very minimal, providing methods and variables that should allow the user, with plotting techniques, to use Iterative Label Spreading effectively. Plotting techniques and suggested segmentation is on my todo list. Currently, I have not igoroursly tested edge cases, feel free to raise an issue or pull request.
 
 ## Installation
 
@@ -27,7 +27,7 @@ data_set # 2-D numpy array of shape (n_points, dimensions)
 example_ILS = ILS()
 example_ILS.label_spreading(data_set)
 
-segmentation_indices = [...] # pass in indices you wish to segments rmin 
+segmentation_indices = [...] # pass in indices you wish to segment rmin 
 indices, labels = example_ILS.segmentation(segmentation_indices)
 
 example_ILS.label_spreading(data_set, indices, Label) # final label Spreading
