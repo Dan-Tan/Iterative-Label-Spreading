@@ -18,11 +18,11 @@ if __name__ == "__main__":
     setup(
         use_scm_version={"version_scheme": "no-guess-dev"},
         name='iterLS',
-        version='1.0.0',
+        version='0.1.0',
         include_dirs = ["iterLS"],
         package_data={"iterLS": ["*.pyx", "*.c", "*.h", "*.py"]},
-        setup_requires=['Cython', 'numpy', 'scipy'],
+        setup_requires=['Cython', 'numpy', 'scipy', 'matplotlib'],
         packages = ['iterLS'],
-        install_requires = ['numpy', 'scipy', 'Cython'],
+        install_requires = ['numpy', 'scipy', 'Cython', 'matplotlib'],
         ext_modules=extensions
         )

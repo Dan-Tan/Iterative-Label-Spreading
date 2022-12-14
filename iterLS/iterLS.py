@@ -1,6 +1,10 @@
 from .cython_wrapper import ils_spread
 from .admm import admm
-from numpy import array, split, argmin, intc, empty_like, arange, argsort
+from numpy import array, split, argmin, intc, empty_like, arange, argsort, zeros, hstack
+
+# used for plotting methods
+import matplotlib.pyplot as plt
+from matplotlib.collections import LineCollection
 
 class ILS():
 
@@ -26,6 +30,7 @@ class ILS():
 
         self.dims = X.shape[1]
         self.n_points = X.shape[0]
+        n_labelled = len(indx_labelled)
         
         unlabelled_inds = [i for i in range(self.n_points) if i not in indx_labelled]
         
@@ -36,7 +41,7 @@ class ILS():
         
         temp_labels, temp_ords, temp_rmin = ils_spread(labelled,
                 unlabelled, X_flat, labels, self.dims, 
-                self.n_points, self.n_labelled)
+                self.n_points, n_labelled)
 
         if len(indx_labelled) == 1:
             # don't set rmin if the this is the second spreading call
@@ -76,6 +81,59 @@ class ILS():
         labels = [i+1 for i in range(len(mins))]
 
         return mins, labels
+
+    def plot_rmin(self, cluster_colouring = False, labels = None, colours = plt.cm.tab20, max_rmin = None):
+        '''
+        Plot the distance ILS 'jumped' each iterations with the option to include colouring by cluster_colouring
+        and providing labels if evaluating cluster quality. 
+
+        Arguements:
+            cluster_colouring: Boolean (default: False), colour plot by clusters (True)
+            labels: (optional) labels for each iteration (one less then number of non labelled)
+            colours: matplotlib.pyplot colourmap
+            max_rmin: double, maximum of the y-axis
+        Returns:
+            void
+        '''
+
+        if self.rmin is None:
+            raise Exception("Rmin not initialised, run label spreading before this function call")
+        
+        if not cluster_colouring:
+            labels = [1 for i in range(len(rmin))]
+        elif labels is None and self.labels is None:
+            raise Exception("No labels initialised or passed")
+        elif labels is None:
+            labels = self.labels
+        
+        n_clusters = len(set(labels))
+        label_permuted = [labels[i] for i in (self.ordering)]
+
+        # create line segments for LineCollection to speed up plotting
+        temp = array([[xi, yi] for (xi, yi) in zip(arange(len(self.rmin)), self.rmin)])
+        temp = temp.reshape((-1, 1, 2))
+        segments = hstack([temp[:-1], temp[1:]])
+        
+        fig, ax = plt.subplots()
+        ymax = max(self.rmin) if max_rmin is None else max_rmin
+        ax.set_xlim([0, len(self.rmin)])
+        ax.set_ylim([0, ymax])
+
+        colours = [colours(label_permuted[i]) for i in range(len(self.rmin))]
+        lineColl = LineCollection(segments, colors = colours, linestyle='solid')
+
+        ax.add_collection(lineColl)
+        cond_title = "Coloured by Clusters" if cluster_colouring else ""
+        ax.set_title(r"$R_{min}$ Plot " + cond_title)
+        ax.set_ylabel(r"$R_{min}$")
+        ax.set_xlabel("ILS ordering")
+        plt.show()
+
+
+
+
+
+
 
 
 def invert_permutation(p: list):
