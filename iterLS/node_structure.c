@@ -2,20 +2,23 @@
 #include <stdlib.h>
 #include "node.h"
 
+// NOTE: This linked list implementation is specific for use in ILS
+
 Node* init_node(int ind, int lab, double dist) {
 
     Node* new_node = malloc(sizeof(Node));
     new_node->index = ind;
     new_node->dist = dist;
     new_node->label = lab;
-    new_node->next = new_node; // circulr ll definition
+    new_node->next = new_node; // circular ll definition
     new_node->prev = new_node;
 
     return new_node;
 }
 
 Node* insert(Node* head, Node* to_insert) {
-    
+    // prepending
+
     Node* prev = head->prev;
     
     to_insert->prev = prev;
@@ -28,7 +31,7 @@ Node* insert(Node* head, Node* to_insert) {
 }
 
 Node* remove_node(Node* to_remove) {
-
+    // next and prev links will be reassigned when add to other list
     Node* prev = to_remove->prev;
     Node* next = to_remove->next;
 
@@ -46,7 +49,7 @@ Node* remove_node(Node* to_remove) {
 }
 
 void free_ll(Node* head, int lent) {
-
+    // free memory
     Node* next;
 
     for (int i = 0; i < lent; i++) {

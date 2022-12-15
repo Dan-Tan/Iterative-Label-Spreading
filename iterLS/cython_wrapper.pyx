@@ -7,7 +7,8 @@ cdef extern from "node.h":
     void set_dimensions(int dims)
     void set_n_points(int n)
     void set_n_labelled(int n)
-
+    
+    # extraction is performed in c so we don't need struct definition
     ctypedef struct Node:
         pass
 
@@ -43,7 +44,7 @@ def ils_spread(int[:] labelled, int[:] unlabelled_inds, double[:] points, int[:]
     ords = extract_ordering(node_out, n_points, first_index)
     dists = extract_distances(node_out, n_points, first_index)
     
-    # convert ctypes to python data types
+    # convert ctypes to python data types, can probably avoid this
     lab = [labs[i] for i in range(n_labelled, n_points)] 
     ord_ = [ords[i] for i in range(n_labelled, n_points) if dists[i] != -1]
     dist = [dists[i] for i in range(n_labelled, n_points) if dists[i] != -1]
