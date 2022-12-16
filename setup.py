@@ -19,10 +19,10 @@ if __name__ == "__main__":
         use_scm_version={"version_scheme": "no-guess-dev"},
         name='iterLS',
         version='0.1.0',
-        include_dirs = ["iterLS"],
+        include_dirs = [np.get_include(), "iterLS"],
         package_data={"iterLS": ["*.pyx", "*.c", "*.h", "*.py"]},
-        setup_requires=['Cython', 'numpy', 'scipy', 'matplotlib'],
+        setup_requires=['Cython', 'numpy', 'scipy', 'matplotlib', 'scikit-learn'],
         packages = ['iterLS'],
-        install_requires = ['numpy', 'scipy', 'Cython', 'matplotlib'],
+        install_requires = ['numpy', 'scipy', 'Cython', 'matplotlib', 'scikit-learn'],
         ext_modules=extensions
         )
