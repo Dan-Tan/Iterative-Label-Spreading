@@ -30,12 +30,4 @@ Node* remove_node(Node* to_remove);
 // used in python wrapper
 void free_ll(Node* head, int lent);
 
-void free_out(int* labs, int* ords, double* dists);
-
-int* extract_labels(Node* output, int lent, int first_index);
-
-int* extract_ordering(Node* output, int lent, int first_index);
-
-double* extract_distances(Node* output, int lent, int first_index);
-
 Node* spread_labels(int labelled_inds[], int unlabelled_inds[], int labels[], double* points);

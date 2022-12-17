@@ -160,8 +160,8 @@ class ILS():
             if embedding.shape[1] != 2:
                 raise Exception("Dimensions of t-SNE embedding should be 2")
         
-        c_ords = self.ordering + self._first
-        plt.scatter(X[c_ords, 0], X[c_ords, 1], c = arange(self.n_points), cmap = colours)
+        c_ords = self._first + self.ordering
+        plt.scatter(X[c_ords, 0], X[c_ords, 1], c = arange(self.n_points), cmap = colours, s = size)
         plt.show()
 
 def invert_permutation(p: list):
