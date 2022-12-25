@@ -7,7 +7,7 @@ if __name__ == "__main__":
     extensions = cythonize(
             Extension(
                 name = "iterLS.cython_wrapper",
-                sources = ["iterLS/cython_wrapper.pyx", 'iterLS/label_spreading.c', "iterLS/convert.c", "iterLS/node_structure.c"],
+                sources = ["iterLS/cython_wrapper.pyx", 'iterLS/label_spreading.c', "iterLS/node_structure.c"],
                 include_dirs = ["iterLS"],
                 extra_link_args = ["-lm"],
                 language = 'c'

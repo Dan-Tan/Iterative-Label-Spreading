@@ -13,6 +13,7 @@ class ILS():
 
     def __init__(self, ):
         self.rmin = None
+        self._embedding = None;
 
     def label_spreading(self, X, indx_labelled = [0], labels = [1]):
         '''
@@ -133,7 +134,7 @@ class ILS():
         ax.set_xlabel("ILS ordering")
         plt.show()
 
-    def plot_ordering(self, colours = 'spring', X = None, size = 1, *args, **kwargs):
+    def plot_ordering(self, colours = 'spring', X = None, size = 1, use_embedding = False, path = None, *args, **kwargs):
         '''
         plot the ordering of ILS through the data. For high dimensional data use t-SNE or pass
         data set with dimensionsality reduction to 2D
@@ -142,6 +143,7 @@ class ILS():
             colours: matplotlib continuous colour map
             X: (optional) data set passed; default is set used originally
             size: size of scatter points
+            use_embedding: Boolean, use an embedding previously stored in ILS.
             *args, **kwargs: params for tSNE
         Return:
             void
@@ -156,13 +158,61 @@ class ILS():
 
         if dims != 2:
             # performs TSNE here
-            embedding = TSNE(*args, **kwargs).fit(self._X.copy()).embedding_
-            if embedding.shape[1] != 2:
+            if self._embedding is None and X is None and (not use_embedding):
+                raise Exception("Not embedding given, requested or stored. Try use_embedding = True or pass an embedding")
+            if not use_embedding:
+                self._embedding = TSNE(*args, **kwargs).fit(self._X.copy()).embedding_
+            if self._embedding.shape[1] != 2:
                 raise Exception("Dimensions of t-SNE embedding should be 2")
         
         c_ords = self._first + self.ordering
         plt.scatter(X[c_ords, 0], X[c_ords, 1], c = arange(self.n_points), cmap = colours, s = size)
-        plt.show()
+        if path is not None:
+            plt.savefig(path)
+        else:
+            plt.show()
+
+    def plot_labels(self, colours = 'spring', X = None, size = 1, use_embedding = None, path = None, *args, **kwargs):
+        '''
+        Plot the labels given by ILS. For higher dimensionsal data use 
+        t-SNE or pass data set with dimensionsality to 2D.
+        Arguements:
+            colours: String, name of continuous colour map given or list of colours
+            X: (Optional), given dataset of dimensions 2 default is data set used for label spreading
+            size: int (default = 1), size of points on the scatter plot
+            *args, **kwargs: arguements to be passed to t-SNE
+        Return: 
+            void
+        '''
+
+        if X is None and self._X is None:
+            raise Exception("Data not given or initialised, run label spreading before this function call")
+        elif X is None:
+            X = self._X
+        
+        dims = X.shape[0]
+        if dims != 2:
+            # performs TSNE here
+            if self._embedding is None and X is None and (not use_embedding):
+                raise Exception("Not embedding given, requested or stored. Try use_embedding = True or pass an embedding")
+            if not use_embedding:
+                self._embedding = TSNE(*args, **kwargs).fit(self._X.copy()).embedding_
+            if self._embedding.shape[1] != 2:
+                raise Exception("Dimensions of t-SNE embedding should be 2")
+
+        if (not isinstance(colours, list)):
+            n_clusters = len(set(self.labels))
+            cmap = plt.get_cmap(colours)
+            colours = [cmap(lab/n_clusters) for lab in self.labels]
+
+        plt.scatter(X[:, 0], X[:, 1], c = colours, s = size)
+
+        if path is not None:
+            plt.savefig(path)
+        else:
+            plt.show()
+
+
 
 def invert_permutation(p: list):
     '''
