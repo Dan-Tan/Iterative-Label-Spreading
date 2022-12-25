@@ -1,4 +1,4 @@
-from .cython_wrapper import ils_spread
+from .cython_wrapper/cython_wrapper import ils_spread
 from .admm import admm
 from numpy import array, split, argmin, intc, empty_like, arange, argsort, zeros, hstack
 

@@ -4,7 +4,7 @@ cimport cython
 import numpy as np
 cimport numpy as np
 
-cdef extern from "node.h":
+cdef extern from "../c_functions/node.h":
 
     # setters for global variables
     void set_dimensions(int dims)

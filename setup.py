@@ -7,8 +7,8 @@ if __name__ == "__main__":
     extensions = cythonize(
             Extension(
                 name = "iterLS.cython_wrapper",
-                sources = ["iterLS/cython_wrapper.pyx", 'iterLS/label_spreading.c', "iterLS/node_structure.c"],
-                include_dirs = ["iterLS"],
+                sources = ["iterLS/cython_wrapper/cython_wrapper.pyx", 'iterLS/c_functions/label_spreading.c', "iterLS/c_functions/node_structure.c"],
+                include_dirs = ["iterLS", "iterLS/cython_wrapper", "iterLS/c_functions"],
                 extra_link_args = ["-lm"],
                 language = 'c'
                 ),
@@ -19,7 +19,7 @@ if __name__ == "__main__":
         use_scm_version={"version_scheme": "no-guess-dev"},
         name='iterLS',
         version='0.1.0',
-        include_dirs = [np.get_include(), "iterLS"],
+        include_dirs = [np.get_include(), "iterLS", "iterLS/cython_wrapper", "iterLS/c_functions"],
         package_data={"iterLS": ["*.pyx", "*.c", "*.h", "*.py"]},
         setup_requires=['Cython', 'numpy', 'scipy', 'matplotlib', 'scikit-learn'],
         packages = ['iterLS'],
