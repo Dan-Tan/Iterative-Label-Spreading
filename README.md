@@ -19,6 +19,8 @@ pip install .
 
 ## Usage
 
+For more examples with plots see [notebooks](https://github.com/Dan-Tan/Iterative-Label-Spreading/blob/master/notebooks/Example_Usage.ipynb)
+
 ```python
 from iterLS import ILS
 
