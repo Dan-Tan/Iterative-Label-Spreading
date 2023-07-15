@@ -14,7 +14,7 @@ The current implementation is very minimal, providing methods and variables that
 ```bash
 git clone git+https://github.com/Dan-Tan/Iterative-Label-Spreading.git
 cd Iterative-Label-Spreading
-pip install -e .
+pip install .
 ```
 
 ## Usage
@@ -30,11 +30,13 @@ example_ILS.label_spreading(data_set)
 segmentation_indices = [...] # pass in indices you wish to segment rmin 
 indices, labels = example_ILS.segmentation(segmentation_indices)
 
-example_ILS.label_spreading(data_set, indices, Label) # final label Spreading
+example_ILS.label_spreading(data_set, indices, labels) # final label Spreading
 
 example_ILS.labels # final label result for entire dataset
 example_ILS.rmin # list of distances returned from label spreading
 ```
+
+If you have any issues with install feel free to raise and issue.
 
 ## Todo:
 

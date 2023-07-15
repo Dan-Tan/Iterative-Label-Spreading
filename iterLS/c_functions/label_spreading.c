@@ -38,7 +38,7 @@ double euclidean_sq(double* p1, double* p2) {
     double temp;
     double sum = 0;
 
-    for (int i = DIMENSIONS-1; i; i--) {
+    for (int i = 0; i < DIMENSIONS; i++) {
         temp = p1[i] - p2[i];
         sum += temp * temp;
     }

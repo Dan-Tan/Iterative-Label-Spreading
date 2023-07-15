@@ -8,7 +8,7 @@ if __name__ == "__main__":
             Extension(
                 name = "iterLS.cython_wrapper",
                 sources = ["iterLS/cython_wrapper/cython_wrapper.pyx", 'iterLS/c_functions/label_spreading.c', "iterLS/c_functions/node_structure.c"],
-                include_dirs = ["iterLS", "iterLS/cython_wrapper", "iterLS/c_functions"],
+                include_dirs = ["iterLS", "iterLS/cython_wrapper/", "iterLS/c_functions/"],
                 extra_link_args = ["-lm"],
                 language = 'c'
                 ),

@@ -1,4 +1,4 @@
-from .cython_wrapper/cython_wrapper import ils_spread
+from iterLS.cython_wrapper import ils_spread
 from .admm import admm
 from numpy import array, split, argmin, intc, empty_like, arange, argsort, zeros, hstack
 
@@ -10,6 +10,16 @@ from matplotlib.collections import LineCollection
 from sklearn.manifold import TSNE
 
 class ILS():
+    '''
+    The ILS object. Please use notebooks ?<method> to find out more information on class methods.
+    Compute methods:
+        ILS.label_spreading: performs label spreading and is the main algorithm
+        ILS.segmentation: Will accept of integers indicating where to segment and return the minimum for each segment. Performs simple smoothing to find minimum.
+    Plotting methods:
+        ILS.plot_rmin: Produces a plot of the distance of each ILS 'step'
+        ILS.plot_labels: Plots the labels of the obtained clusters
+        ILS.plot_ordering: Plots the order that ILS propagated throughout the data set
+    '''
 
     def __init__(self, ):
         self.rmin = None
