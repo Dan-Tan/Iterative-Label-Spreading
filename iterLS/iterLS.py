@@ -205,9 +205,10 @@ class ILS():
             # performs TSNE here
             if self._embedding is None and X is None and (not use_embedding):
                 raise Exception("Not embedding given, requested or stored. Try use_embedding = True or pass an embedding")
-            if not use_embedding:
+            if use_embedding:
                 self._embedding = TSNE(*args, **kwargs).fit(self._X.copy()).embedding_
-            if self._embedding.shape[1] != 2:
+                X = self._embedding
+            if not self._embedding is None and self._embedding.shape[1] != 2:
                 raise Exception("Dimensions of t-SNE embedding should be 2")
 
         if (not isinstance(colours, list)):
